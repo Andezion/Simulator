@@ -4,10 +4,21 @@
 // #include <iostream>
 
 class MainFrame {
-    MainFrame() = default;
-
-
+public:    
+    sf::RectangleShape main_frame;
     
+    MainFrame(float size_x, float size_y, float pos_x, float pos_y) {
+        main_frame.setSize(sf::Vector2f(size_x, size_y));
+        main_frame.setFillColor(sf::Color::White);
+        main_frame.setPosition(pos_x, pos_y);
+        main_frame.setOutlineColor(sf::Color::Black);
+        main_frame.setOutlineThickness(1.0f);
+    }
+
+    void draw(sf::RenderWindow& window) {
+        window.draw(main_frame);
+    }
+
     ~MainFrame() = default;
 };
 
@@ -21,11 +32,13 @@ int main() {
     float scale_50_x = window.getSize().x / 24.0f;
     float scale_50_y = window.getSize().y / 16.0f;
 
-    sf::RectangleShape main_frame(sf::Vector2f(scale_100_x * 9, scale_100_y * 7));
-    main_frame.setFillColor(sf::Color::White);
-    main_frame.setPosition(scale_100_x * 2 + scale_50_x, scale_50_y);
-    main_frame.setOutlineColor(sf::Color::Black);
-    main_frame.setOutlineThickness(1.0f);
+    MainFrame main_frame(scale_100_x * 9, scale_100_y * 7, scale_100_x * 2 + scale_50_x, scale_50_y);
+
+    // sf::RectangleShape main_frame(sf::Vector2f(scale_100_x * 9, scale_100_y * 7));
+    // main_frame.setFillColor(sf::Color::White);
+    // main_frame.setPosition(scale_100_x * 2 + scale_50_x, scale_50_y);
+    // main_frame.setOutlineColor(sf::Color::Black);
+    // main_frame.setOutlineThickness(1.0f);
 
     sf::RectangleShape rectangle(sf::Vector2f(scale_100_x , scale_100_y / 2));
     rectangle.setFillColor(sf::Color::Green);
@@ -48,7 +61,8 @@ int main() {
 
         window.clear(sf::Color(184, 183, 177, 255));
 
-        window.draw(main_frame);
+        // window.draw(main_frame);
+        main_frame.draw(window);
         window.draw(rectangle);
 
         window.display();
