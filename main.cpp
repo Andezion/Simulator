@@ -1,6 +1,8 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Graphics/RectangleShape.hpp>
+#include <SFML/Graphics/Vertex.hpp>
 #include <SFML/Window/Keyboard.hpp>
+// #include <vector>
 // #include <iostream>
 
 class MainFrame {
@@ -17,6 +19,24 @@ public:
 
     void draw(sf::RenderWindow& window) {
         window.draw(main_frame);
+    }
+
+    void draw_vertical_lines(sf::RenderWindow& window) {
+        for (float i = main_frame.getPosition().x; i < main_frame.getPosition().x + main_frame.getSize().x; i += main_frame.getSize().x / 100.0f) {
+            sf::Vertex line[] = {
+                sf::Vertex(sf::Vector2f(i, main_frame.getPosition().y), sf::Color::Black),
+                sf::Vertex(sf::Vector2f(i, main_frame.getPosition().y + main_frame.getSize().y), sf::Color::Black)
+            };
+            window.draw(line, 2, sf::Lines);
+        }
+
+        for (float i = main_frame.getPosition().y; i < main_frame.getPosition().y + main_frame.getSize().y; i += main_frame.getSize().y / 100.0f) {
+            sf::Vertex line[] = {
+                sf::Vertex(sf::Vector2f(main_frame.getPosition().x, i), sf::Color::Black),
+                sf::Vertex(sf::Vector2f(main_frame.getPosition().x + main_frame.getSize().x, i), sf::Color::Black)
+            };
+            window.draw(line, 2, sf::Lines);
+        }
     }
 
     ~MainFrame() = default;
@@ -61,6 +81,8 @@ int main() {
         window.clear(sf::Color(184, 183, 177, 255));
 
         main_frame.draw(window);
+        main_frame.draw_vertical_lines(window);
+
         window.draw(rectangle);
 
         window.display();
