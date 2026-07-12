@@ -16,10 +16,14 @@ int main() {
     sf::RectangleShape main_frame(sf::Vector2f(scale_100_x * 9, scale_100_y * 7));
     main_frame.setFillColor(sf::Color::White);
     main_frame.setPosition(scale_100_x * 2 + scale_50_x, scale_50_y);
+    main_frame.setOutlineColor(sf::Color::Black);
+    main_frame.setOutlineThickness(1.0f);
 
-    sf::RectangleShape rectangle(sf::Vector2f(scale_100_x , scale_100_y));
+    sf::RectangleShape rectangle(sf::Vector2f(scale_100_x , scale_100_y / 2));
     rectangle.setFillColor(sf::Color::Green);
     rectangle.setPosition(scale_100_x, scale_100_y);
+    rectangle.setOutlineColor(sf::Color::Black);
+    rectangle.setOutlineThickness(1.0f);
 
     while (window.isOpen()) {
         sf::Event event;
@@ -35,8 +39,10 @@ int main() {
         }
 
         window.clear(sf::Color(184, 183, 177, 255));
+
         window.draw(main_frame);
         window.draw(rectangle);
+
         window.display();
     }
 }
