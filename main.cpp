@@ -37,6 +37,14 @@ public:
         line[0].color = sf::Color::Black;
         line[1].color = sf::Color::Black;
         window.draw(line, 2, sf::Lines);
+
+        sf::Vertex line2[] = {
+                sf::Vertex(sf::Vector2f(250, 60)),
+                sf::Vertex(sf::Vector2f(1150, 60))
+        };
+        line2[0].color = sf::Color::Black;
+        line2[1].color = sf::Color::Black;
+        window.draw(line2, 2, sf::Lines);
     }
 
     ~MainFrame() = default;
