@@ -22,21 +22,25 @@ public:
     }
 
     void draw_lines(sf::RenderWindow& window) {
-        // for (float i = main_frame.getPosition().x; i < main_frame.getPosition().x + main_frame.getSize().x; i += main_frame.getSize().x / 12.0f) {
-        //     sf::Vertex line[] = {
-        //         sf::Vertex(sf::Vector2f(i, main_frame.getPosition().y)),
-        //         sf::Vertex(sf::Vector2f(i, main_frame.getPosition().y + main_frame.getSize().y))
-        //     };
-        //     window.draw(line, 2, sf::Lines);
-        // }
+        
+        // for x 
+        for (float x = main_frame.getPosition().x + 10.0f; x < 1150.0f; x += 10.0f) {
+            sf::Vertex line[] = {
+                    sf::Vertex(sf::Vector2f(x, 50)),
+                    sf::Vertex(sf::Vector2f(x, 750))
+            };
+            line[0].color = sf::Color(0, 0, 0, 50);
+            line[1].color = sf::Color(0, 0, 0, 50);
+            window.draw(line, 2, sf::Lines);
+        }
 
-        sf::Vertex line[] = {
-                sf::Vertex(sf::Vector2f(260, 50)),
-                sf::Vertex(sf::Vector2f(260, 750))
-        };
-        line[0].color = sf::Color::Black;
-        line[1].color = sf::Color::Black;
-        window.draw(line, 2, sf::Lines);
+        // sf::Vertex line[] = {
+        //         sf::Vertex(sf::Vector2f(main_frame.getPosition().x + 10.0f, 50)),
+        //         sf::Vertex(sf::Vector2f(main_frame.getPosition().x + 10.0f, 750))
+        // };
+        // line[0].color = sf::Color::Black;
+        // line[1].color = sf::Color::Black;
+        // window.draw(line, 2, sf::Lines);
 
         sf::Vertex line2[] = {
                 sf::Vertex(sf::Vector2f(250, 60)),
