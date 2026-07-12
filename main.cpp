@@ -22,6 +22,11 @@ public:
     ~MainFrame() = default;
 };
 
+class Rocket {
+    Rocket() = default;
+    ~Rocket() = default;
+};
+
 int main() {
     sf::RenderWindow window(sf::VideoMode(1200, 800), "Simulator");
     window.setFramerateLimit(120);
