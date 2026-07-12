@@ -3,6 +3,14 @@
 #include <SFML/Window/Keyboard.hpp>
 // #include <iostream>
 
+class MainFrame {
+    MainFrame() = default;
+
+
+    
+    ~MainFrame() = default;
+};
+
 int main() {
     sf::RenderWindow window(sf::VideoMode(1200, 800), "Simulator");
     window.setFramerateLimit(120);
