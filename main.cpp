@@ -23,7 +23,7 @@ int main() {
             }
         }
 
-        window.clear(sf::Color::White);
+        window.clear(sf::Color(184, 183, 177, 255));
         window.draw(rectangle);
         window.display();
     }
