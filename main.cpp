@@ -3,7 +3,7 @@
 #include <SFML/Graphics/Vertex.hpp>
 #include <SFML/Window/Keyboard.hpp>
 // #include <vector>
-// #include <iostream>
+#include <iostream>
 
 class MainFrame {
 public:    
@@ -21,22 +21,22 @@ public:
         window.draw(main_frame);
     }
 
-    void draw_vertical_lines(sf::RenderWindow& window) {
-        for (float i = main_frame.getPosition().x; i < main_frame.getPosition().x + main_frame.getSize().x; i += main_frame.getSize().x / 100.0f) {
-            sf::Vertex line[] = {
-                sf::Vertex(sf::Vector2f(i, main_frame.getPosition().y), sf::Color::Black),
-                sf::Vertex(sf::Vector2f(i, main_frame.getPosition().y + main_frame.getSize().y), sf::Color::Black)
-            };
-            window.draw(line, 2, sf::Lines);
-        }
+    void draw_lines(sf::RenderWindow& window) {
+        // for (float i = main_frame.getPosition().x; i < main_frame.getPosition().x + main_frame.getSize().x; i += main_frame.getSize().x / 12.0f) {
+        //     sf::Vertex line[] = {
+        //         sf::Vertex(sf::Vector2f(i, main_frame.getPosition().y)),
+        //         sf::Vertex(sf::Vector2f(i, main_frame.getPosition().y + main_frame.getSize().y))
+        //     };
+        //     window.draw(line, 2, sf::Lines);
+        // }
 
-        for (float i = main_frame.getPosition().y; i < main_frame.getPosition().y + main_frame.getSize().y; i += main_frame.getSize().y / 100.0f) {
-            sf::Vertex line[] = {
-                sf::Vertex(sf::Vector2f(main_frame.getPosition().x, i), sf::Color::Black),
-                sf::Vertex(sf::Vector2f(main_frame.getPosition().x + main_frame.getSize().x, i), sf::Color::Black)
-            };
-            window.draw(line, 2, sf::Lines);
-        }
+        sf::Vertex line[] = {
+                sf::Vertex(sf::Vector2f(260, 50)),
+                sf::Vertex(sf::Vector2f(260, 750))
+        };
+        line[0].color = sf::Color::Black;
+        line[1].color = sf::Color::Black;
+        window.draw(line, 2, sf::Lines);
     }
 
     ~MainFrame() = default;
@@ -81,7 +81,7 @@ int main() {
         window.clear(sf::Color(184, 183, 177, 255));
 
         main_frame.draw(window);
-        main_frame.draw_vertical_lines(window);
+        main_frame.draw_lines(window);
 
         window.draw(rectangle);
 
