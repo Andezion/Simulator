@@ -3,7 +3,7 @@
 #include <SFML/Graphics/Vertex.hpp>
 #include <SFML/Window/Keyboard.hpp>
 // #include <vector>
-#include <iostream>
+// #include <iostream>
 
 class MainFrame {
 public:    
@@ -44,21 +44,43 @@ public:
             line[1].color = sf::Color(0, 0, 0, 50);
             window.draw(line, 2, sf::Lines);
         }
+    }
 
-        // sf::Vertex line2[] = {
-        //         sf::Vertex(sf::Vector2f(250, 60)),
-        //         sf::Vertex(sf::Vector2f(1150, 60))
-        // };
-        // line2[0].color = sf::Color::Black;
-        // line2[1].color = sf::Color::Black;
-        // window.draw(line2, 2, sf::Lines);
+    std::pair<float, float> getPosition() {
+        return std::make_pair(main_frame.getPosition().x, main_frame.getPosition().y);
+    }
+
+    std::pair<float, float> getSize() {
+        return std::make_pair(main_frame.getSize().x, main_frame.getSize().y);
     }
 
     ~MainFrame() = default;
 };
 
 class Rocket {
-    Rocket() = default;
+public:
+    sf::RectangleShape rocket;
+
+    Rocket(float size_x, float size_y, float pos_x, float pos_y) {
+        rocket.setSize(sf::Vector2f(size_x, size_y));
+        rocket.setFillColor(sf::Color::Green);
+        rocket.setPosition(pos_x, pos_y);
+        rocket.setOutlineColor(sf::Color::Black);
+        rocket.setOutlineThickness(1.0f);
+    }
+
+    void draw(sf::RenderWindow& window) {
+        window.draw(rocket);
+    }
+
+    std::pair<float, float> getPosition() {
+        return std::make_pair(rocket.getPosition().x, rocket.getPosition().y);
+    }
+
+    std::pair<float, float> getSize() {
+        return std::make_pair(rocket.getSize().x, rocket.getSize().y);
+    }
+
     ~Rocket() = default;
 };
 
@@ -74,11 +96,8 @@ int main() {
 
     MainFrame main_frame(scale_100_x * 9, scale_100_y * 7, scale_100_x * 2 + scale_50_x, scale_50_y);
 
-    sf::RectangleShape rectangle(sf::Vector2f(scale_100_x , scale_100_y / 2));
-    rectangle.setFillColor(sf::Color::Green);
-    rectangle.setPosition(scale_100_x, scale_100_y);
-    rectangle.setOutlineColor(sf::Color::Black);
-    rectangle.setOutlineThickness(1.0f);
+    Rocket rocket(scale_100_x / 8, scale_100_y / 4, 
+        main_frame.getPosition().first + 50.0f, main_frame.getPosition().second + main_frame.getSize().second - scale_100_y / 4);
 
     while (window.isOpen()) {
         sf::Event event;
@@ -98,7 +117,7 @@ int main() {
         main_frame.draw(window);
         main_frame.draw_lines(window);
 
-        window.draw(rectangle);
+        rocket.draw(window);
 
         window.display();
     }
