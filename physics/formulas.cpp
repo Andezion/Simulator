@@ -1,4 +1,3 @@
-#include "formulas.hpp"
 #include <cmath>
 
 float time_of_the_flight(float v0, float angle) {
