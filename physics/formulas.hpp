@@ -1,3 +1,5 @@
+#pragma once
+
 float time_of_the_flight(float v0, float angle);
 float max_height(float v0, float angle);
 float distance_of_the_flight(float v0, float angle);

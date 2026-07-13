@@ -1,9 +1,14 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Graphics/RectangleShape.hpp>
 #include <SFML/Graphics/Vertex.hpp>
+#include <SFML/System/Clock.hpp>
 #include <SFML/Window/Keyboard.hpp>
+#include <ctime>
+
 // #include <vector>
 // #include <iostream>
+
+#include "physics/formulas.hpp"
 
 class MainFrame {
 public:    
@@ -81,6 +86,14 @@ public:
         return std::make_pair(rocket.getSize().x, rocket.getSize().y);
     }
 
+    void execute(float (*move) (float, float), float t) {
+        rocket.setPosition(rocket.getPosition().x, move(rocket.getPosition().y, t));
+    }
+
+    void execute(float (*move) (float, float, float), float h0, float a, float t) {
+        rocket.setPosition(rocket.getPosition().x, move(h0, a, t));
+    }
+
     ~Rocket() = default;
 };
 
@@ -99,6 +112,8 @@ int main() {
     Rocket rocket(scale_100_x / 8, scale_100_y / 4, 
         main_frame.getPosition().first + 50.0f, main_frame.getPosition().second + main_frame.getSize().second - scale_100_y / 4);
 
+    sf::Clock clock;
+
     while (window.isOpen()) {
         sf::Event event;
         while (window.pollEvent(event)) {
@@ -113,6 +128,7 @@ int main() {
         main_frame.draw_lines(window);
 
         rocket.draw(window);
+        rocket.execute(h_up, rocket.getPosition().second, acceleration_up(100.0f, 10.0f), clock.getElapsedTime().asSeconds());
 
         window.display();
     }

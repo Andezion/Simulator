@@ -1,4 +1,5 @@
 #include <cmath>
+#include "formulas.hpp"
 
 float time_of_the_flight(float v0, float angle) {
     return (2 * v0 * sin(angle)) / 9.81f;
@@ -37,7 +38,7 @@ float v_up(float v0, float a, float t) {
 }
 
 float h_up(float h0, float a, float t) {
-    return h0 + a * t * t / 2;
+    return h0 - a * t * t / 2;
 }
 
 float acceleration_down(float F, float m) {
