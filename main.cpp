@@ -4,6 +4,7 @@
 #include <SFML/Window/Keyboard.hpp>
 // #include <vector>
 // #include <iostream>
+#include <cmath>
 
 class MainFrame {
 public:    
@@ -84,6 +85,18 @@ public:
     ~Rocket() = default;
 };
 
+float time_of_the_flight(float v0, float angle) {
+    return (2 * v0 * sin(angle)) / 9.81f;
+}
+
+float max_height(float v0, float angle) {
+    return (v0 * v0 * sin(angle) * sin(angle)) / (2 * 9.81f);
+}
+
+float distance_of_the_flight(float v0, float angle) {
+    return (v0 * v0 * sin(2 * angle)) / 9.81f;
+}
+
 int main() {
     sf::RenderWindow window(sf::VideoMode(1200, 800), "Simulator");
     window.setFramerateLimit(120);
@@ -105,11 +118,6 @@ int main() {
             if (event.type == sf::Event::Closed || sf::Keyboard::isKeyPressed(sf::Keyboard::Escape) || sf::Keyboard::isKeyPressed(sf::Keyboard::Q)) {
                 window.close();
             }
-
-            // if (event.type == sf::Event::Resized) {
-            //     std::cout << "new width: " << event.size.width << std::endl;
-            //     std::cout << "new height: " << event.size.height << std::endl;
-            // }
         }
 
         window.clear(sf::Color(184, 183, 177, 255));
