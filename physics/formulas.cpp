@@ -52,3 +52,7 @@ float v_down(float v, float a, float t) {
 float h_down(float h, float v, float t) {
     return h - v * t - 9.81f * t * t / 2;
 }
+
+float basic_up_and_down(float (*move_up) (float, float, float), float (*move_down) (float, float, float), float h0, float a, float t) {
+    while ()
+}

@@ -17,3 +17,6 @@ float h_up(float h0, float a, float t);
 float acceleration_down(float F, float m);
 float v_down(float v, float a, float t);
 float h_down(float h, float v, float t);
+
+
+float basic_up_and_down(float (*move_up) (float, float, float), float (*move_down) (float, float, float), float h0, float a, float t);
