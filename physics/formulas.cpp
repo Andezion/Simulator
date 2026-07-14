@@ -54,8 +54,15 @@ float h_down(float h, float v, sf::Time t) {
 }
 
 float basic_up_and_down(float h0, float a, sf::Time t, float F, float m) {
-    while (acceleration_up(F, m, t) != 0) {
-        float h = h_up(h0, a, t);
+    if (acceleration_up(F, m, t) != 0) {
+        float h = h_up(h0, acceleration_up(F, m, t), t);
         float v = v_up(0, acceleration_up(F, m, t), t);
+
+        return h;
+    } else {
+        float h = h_down(h0, v_down(0, acceleration_down(F, m, t), t), t);
+        float v = v_down(0, acceleration_down(F, m, t), t);
+
+        return h;
     }
 }

@@ -11,8 +11,8 @@ float vertical_speed(float v0, float angle, float t);
 
 // goes up
 float acceleration_up(float F, float m, sf::Time t);
-float v_up(float v0, float a, float t);
-float h_up(float h0, float a, float t);
+float v_up(float v0, float a, sf::Time t);
+float h_up(float h0, float a, sf::Time t);
 
 // goes down 
 float acceleration_down(float F, float m, sf::Time t);
