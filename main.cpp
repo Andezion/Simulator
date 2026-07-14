@@ -5,7 +5,7 @@
 #include <SFML/Window/Keyboard.hpp>
 
 // #include <vector>
-// #include <iostream>
+#include <iostream>
 
 #include "physics/formulas.hpp"
 
@@ -93,6 +93,22 @@ public:
         rocket.setPosition(rocket.getPosition().x, move(h0, a, t));
     }
 
+    void flow_type_one(float h0, sf::Time t, float F, float m) {
+        
+        if (acceleration_up(F, m, t) >= 0) {
+            float h = h_up(h0, acceleration_up(F, m, t), t);
+            float v = v_up(0, acceleration_up(F, m, t), t);
+
+            rocket.setPosition(rocket.getPosition().x, h);
+        } else {
+            float h1 = h_down(rocket.getPosition().y, v_down(0, acceleration_down(F, m, t), t), t);
+            float v = v_down(0, acceleration_down(F, m, t), t);
+            
+            rocket.setPosition(rocket.getPosition().x, h1);
+        }
+        std::cout << "h: " << rocket.getPosition().y << std::endl;
+    }
+
     ~Rocket() = default;
 };
 
@@ -127,7 +143,7 @@ int main() {
         main_frame.draw_lines(window);
 
         rocket.draw(window);
-        rocket.execute(h_up, rocket.getPosition().second, acceleration_up(100.0f, 10.0f, clock.getElapsedTime()), clock.getElapsedTime().asSeconds());
+        rocket.flow_type_one(rocket.getPosition().second, clock.getElapsedTime(), 100.0f, 10.0f);
 
         window.display();
     }
