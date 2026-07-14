@@ -3,7 +3,6 @@
 #include <SFML/Graphics/Vertex.hpp>
 #include <SFML/System/Clock.hpp>
 #include <SFML/Window/Keyboard.hpp>
-#include <ctime>
 
 // #include <vector>
 // #include <iostream>
@@ -128,7 +127,7 @@ int main() {
         main_frame.draw_lines(window);
 
         rocket.draw(window);
-        rocket.execute(h_up, rocket.getPosition().second, acceleration_up(100.0f, 10.0f), clock.getElapsedTime().asSeconds());
+        rocket.execute(h_up, rocket.getPosition().second, acceleration_up(100.0f, 10.0f, clock.getElapsedTime()), clock.getElapsedTime().asSeconds());
 
         window.display();
     }
