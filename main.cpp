@@ -104,6 +104,10 @@ public:
             float h1 = h_down(rocket.getPosition().y, v_down(0, acceleration_down(F, m, t), t), t);
             
             rocket.setPosition(rocket.getPosition().x, h1);
+            if (rocket.getPosition().y > 750.0f - rocket.getSize().y) {
+                std::cout << "Rocket has hit the ground!" << std::endl;
+                rocket.setPosition(rocket.getPosition().x, 750.0f - rocket.getSize().y);
+            }
         }
         std::cout << "h: " << rocket.getPosition().y << std::endl;
     }
