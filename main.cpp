@@ -102,7 +102,6 @@ public:
             rocket.setPosition(rocket.getPosition().x, h);
         } else {
             float h1 = h_down(rocket.getPosition().y, v_down(0, acceleration_down(F, m, t), t), t);
-            float v = v_down(0, acceleration_down(F, m, t), t);
             
             rocket.setPosition(rocket.getPosition().x, h1);
         }

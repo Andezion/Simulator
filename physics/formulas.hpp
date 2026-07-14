@@ -19,5 +19,3 @@ float acceleration_down(float F, float m, sf::Time t);
 float v_down(float v, float a, sf::Time t);
 float h_down(float h, float v, sf::Time t);
 
-
-float basic_up_and_down(float h0, sf::Time t, float F, float m);
