@@ -5,9 +5,10 @@
 #include <SFML/Window/Keyboard.hpp>
 
 // #include <vector>
-#include <iostream>
+// #include <iostream>
 
 #include "physics/formulas.hpp"
+#include "buttons/values.hpp"
 
 class MainFrame {
 public:    
@@ -105,11 +106,12 @@ public:
             
             rocket.setPosition(rocket.getPosition().x, h1);
             if (rocket.getPosition().y > 750.0f - rocket.getSize().y) {
-                std::cout << "Rocket has hit the ground!" << std::endl;
+                //std::cout << "Rocket has hit the ground!" << std::endl;
                 rocket.setPosition(rocket.getPosition().x, 750.0f - rocket.getSize().y);
+                return;
             }
         }
-        std::cout << "h: " << rocket.getPosition().y << std::endl;
+        // std::cout << "h: " << rocket.getPosition().y << std::endl;
     }
 
     ~Rocket() = default;
@@ -126,6 +128,11 @@ int main() {
     float scale_50_y = window.getSize().y / 16.0f;
 
     MainFrame main_frame(scale_100_x * 9, scale_100_y * 7, scale_100_x * 2 + scale_50_x, scale_50_y);
+
+    struct RectInfo F_info = {scale_100_x, scale_50_y, scale_100_x, scale_50_y};
+    struct RectInfo m_info = {scale_100_x, scale_50_y, scale_100_x, scale_100_y + scale_50_y};
+
+    Values values(F_info, m_info);
 
     Rocket rocket(scale_100_x / 8, scale_100_y / 4, 
         main_frame.getPosition().first + 50.0f, main_frame.getPosition().second + main_frame.getSize().second - scale_100_y / 4);
@@ -144,6 +151,8 @@ int main() {
 
         main_frame.draw(window);
         main_frame.draw_lines(window);
+
+        values.draw(window);
 
         rocket.draw(window);
         rocket.flow_type_one(rocket.getPosition().second, clock.getElapsedTime(), 100.0f, 10.0f);

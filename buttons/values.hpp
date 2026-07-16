@@ -29,5 +29,10 @@ public:
         m_value.setOutlineThickness(1.0f);
     }
 
+    void draw(sf::RenderWindow& window) {
+        window.draw(F_value);
+        window.draw(m_value);
+    }
+
     ~Values() = default;
 };
