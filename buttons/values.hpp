@@ -15,6 +15,12 @@ public:
     sf::RectangleShape F_value;
     sf::RectangleShape m_value;
 
+    sf::ConvexShape F_value_up;
+    sf::ConvexShape F_value_down;
+
+    sf::ConvexShape m_value_up;
+    sf::ConvexShape m_value_down;
+
     Values(struct RectInfo F_info, struct RectInfo m_info) {
         F_value.setSize(sf::Vector2f(F_info.size_x, F_info.size_y));
         F_value.setFillColor(sf::Color(194, 194, 182));
@@ -27,6 +33,11 @@ public:
         m_value.setPosition(m_info.pos_x, m_info.pos_y);
         m_value.setOutlineColor(sf::Color::Black);
         m_value.setOutlineThickness(1.0f);
+
+        F_value_up.setPointCount(3);
+        F_value_down.setPointCount(3);
+        m_value_up.setPointCount(3);
+        m_value_down.setPointCount(3);
     }
 
     void draw(sf::RenderWindow& window) {
