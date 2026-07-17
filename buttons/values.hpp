@@ -8,6 +8,14 @@
 
 #include "styling/style.hpp"
 
+int intersection(sf::Shape& shape, sf::RenderWindow& window) {
+    sf::Vector2i mouse_pos = sf::Mouse::getPosition(window);
+    if (shape.getGlobalBounds().contains(static_cast<sf::Vector2f>(mouse_pos))) {
+        return 1;
+    }
+    return 0;
+}
+
 struct RectInfo {
     float size_x;
     float size_y;
@@ -45,6 +53,7 @@ public:
         F_value_up.setPoint(2, sf::Vector2f(F_info.pos_x / 4 * 3, F_info.pos_y + F_info.size_y / 3));
         F_value_up.setOutlineColor(sf::Color::Black);
         F_value_up.setOutlineThickness(1.0f);
+        F_value_up.setFillColor(sf::Color::Green);
 
 
         F_value_down.setPointCount(3);
@@ -53,6 +62,7 @@ public:
         F_value_down.setPoint(2, sf::Vector2f(F_info.pos_x / 2, F_info.pos_y + F_info.size_y));
         F_value_down.setOutlineColor(sf::Color::Black);
         F_value_down.setOutlineThickness(1.0f);
+        F_value_down.setFillColor(sf::Color::Red);
 
         m_value_up.setPointCount(3);
         m_value_up.setPoint(0, sf::Vector2f(m_info.pos_x / 2, m_info.pos_y));
@@ -60,6 +70,7 @@ public:
         m_value_up.setPoint(2, sf::Vector2f(m_info.pos_x / 4 * 3, m_info.pos_y + m_info.size_y / 3));
         m_value_up.setOutlineColor(sf::Color::Black);
         m_value_up.setOutlineThickness(1.0f);
+        m_value_up.setFillColor(sf::Color::Green);
 
         m_value_down.setPointCount(3);
         m_value_down.setPoint(0, sf::Vector2f(m_info.pos_x / 4, m_info.pos_y + m_info.size_y / 3 * 2));
@@ -67,18 +78,20 @@ public:
         m_value_down.setPoint(2, sf::Vector2f(m_info.pos_x / 2, m_info.pos_y + m_info.size_y));
         m_value_down.setOutlineColor(sf::Color::Black);
         m_value_down.setOutlineThickness(1.0f);
+        m_value_down.setFillColor(sf::Color::Red);
     }
 
     void draw(sf::RenderWindow& window) {
         window.draw(F_value);
         window.draw(m_value);
-
-        sf::Vector2i position = sf::Mouse::getPosition();
-        if (F_value_up.getLocalBounds().contains(position.x, position.y)) {
-            std::cout << "Hovering over F_value_up" << std::endl;
+        
+        if (intersection(F_value_up, window)) {
             hover(F_value_up);
+            window.draw(F_value_up);
+        } else {
+            window.draw(F_value_up);
         }
-        window.draw(F_value_up);
+        
         window.draw(F_value_down);
         window.draw(m_value_up);
         window.draw(m_value_down);
