@@ -3,6 +3,10 @@
 #include <SFML/Graphics/RectangleShape.hpp>
 #include <SFML/Graphics/Vertex.hpp>
 #include <SFML/Window/Keyboard.hpp>
+#include <SFML/Window/Mouse.hpp>
+#include <iostream>
+
+#include "styling/style.hpp"
 
 struct RectInfo {
     float size_x;
@@ -69,6 +73,11 @@ public:
         window.draw(F_value);
         window.draw(m_value);
 
+        sf::Vector2i position = sf::Mouse::getPosition();
+        if (F_value_up.getLocalBounds().contains(position.x, position.y)) {
+            std::cout << "Hovering over F_value_up" << std::endl;
+            hover(F_value_up);
+        }
         window.draw(F_value_up);
         window.draw(F_value_down);
         window.draw(m_value_up);
