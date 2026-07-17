@@ -38,11 +38,31 @@ public:
         F_value_down.setPointCount(3);
         m_value_up.setPointCount(3);
         m_value_down.setPointCount(3);
+
+        F_value_up.setPoint(0, sf::Vector2f(400.f, 150.f));
+        F_value_up.setPoint(1, sf::Vector2f(250.f, 400.f));
+        F_value_up.setPoint(2, sf::Vector2f(550.f, 400.f));
+
+        F_value_down.setPoint(0, sf::Vector2f(400.f, 150.f));
+        F_value_down.setPoint(1, sf::Vector2f(250.f, 400.f));
+        F_value_down.setPoint(2, sf::Vector2f(550.f, 400.f));
+
+        m_value_up.setPoint(0, sf::Vector2f(400.f, 150.f));
+        m_value_up.setPoint(1, sf::Vector2f(250.f, 400.f));
+        m_value_up.setPoint(2, sf::Vector2f(550.f, 400.f));
+
+        m_value_down.setPoint(0, sf::Vector2f(400.f, 150.f));
+        m_value_down.setPoint(1, sf::Vector2f(250.f, 400.f));
+        m_value_down.setPoint(2, sf::Vector2f(550.f, 400.f));
     }
 
     void draw(sf::RenderWindow& window) {
         window.draw(F_value);
         window.draw(m_value);
+        window.draw(F_value_up);
+        window.draw(F_value_down);
+        window.draw(m_value_up);
+        window.draw(m_value_down);
     }
 
     ~Values() = default;
