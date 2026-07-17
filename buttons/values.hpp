@@ -40,9 +40,9 @@ public:
         m_value_up.setPointCount(3);
         m_value_down.setPointCount(3);
 
-        F_value_up.setPoint(0, sf::Vector2f(400.f, 150.f));
-        F_value_up.setPoint(1, sf::Vector2f(250.f, 400.f));
-        F_value_up.setPoint(2, sf::Vector2f(550.f, 400.f));
+        F_value_up.setPoint(0, sf::Vector2f(F_info.pos_x / 2, F_info.pos_y));
+        F_value_up.setPoint(1, sf::Vector2f(250.f, F_info.pos_y + F_info.size_y / 2));
+        F_value_up.setPoint(2, sf::Vector2f(550.f, F_info.pos_y + F_info.size_y / 2));
 
         F_value_down.setPoint(0, sf::Vector2f(400.f, 150.f));
         F_value_down.setPoint(1, sf::Vector2f(250.f, 400.f));
