@@ -117,8 +117,11 @@ public:
     ~Rocket() = default;
 };
 
+
 int main() {
-    sf::RenderWindow window(sf::VideoMode(1200, 800), "Simulator");
+    // sf::ContextSettings settings;
+    // settings.antialiasingLevel = 4;
+    sf::RenderWindow window(sf::VideoMode(1200, 800), "Simulator", sf::Style::Default);
     window.setFramerateLimit(120);
 
     float scale_100_x = window.getSize().x / 12.0f;
