@@ -10,6 +10,7 @@
 #include "physics/formulas.hpp"
 #include "buttons/values.hpp"
 
+
 class MainFrame {
 public:    
     sf::RectangleShape main_frame;
@@ -117,6 +118,7 @@ public:
     ~Rocket() = default;
 };
 
+int is_hover = 0;
 
 int main() {
     // sf::ContextSettings settings;
@@ -154,6 +156,16 @@ int main() {
 
         main_frame.draw(window);
         main_frame.draw_lines(window);
+
+        if (values.intersection(values.F_value_up, window)) {
+            values.set_new_color(values.F_value_up, sf::Color::Cyan);
+            is_hover = 1;
+        } else {
+            values.set_new_color(values.F_value_up, sf::Color::Green);
+            is_hover = 0;
+        }
+
+        std::cout << "is_hover: " << is_hover << std::endl;
 
         values.draw(window);
 

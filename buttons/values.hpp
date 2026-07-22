@@ -8,14 +8,6 @@
 
 #include "styling/style.hpp"
 
-int intersection(sf::Shape& shape, sf::RenderWindow& window) {
-    sf::Vector2i mouse_pos = sf::Mouse::getPosition(window);
-    if (shape.getGlobalBounds().contains(static_cast<sf::Vector2f>(mouse_pos))) {
-        return 1;
-    }
-    return 0;
-}
-
 struct RectInfo {
     float size_x;
     float size_y;
@@ -55,7 +47,6 @@ public:
         F_value_up.setOutlineThickness(1.0f);
         F_value_up.setFillColor(sf::Color::Green);
 
-
         F_value_down.setPointCount(3);
         F_value_down.setPoint(0, sf::Vector2f(F_info.pos_x / 4 , F_info.pos_y + F_info.size_y / 3 * 2));
         F_value_down.setPoint(1, sf::Vector2f(F_info.pos_x / 4 * 3, F_info.pos_y + F_info.size_y / 3 * 2));
@@ -81,17 +72,24 @@ public:
         m_value_down.setFillColor(sf::Color::Red);
     }
 
+    void set_new_color(sf::Shape& shape, sf::Color color) {
+        shape.setFillColor(color);
+    }
+
+    int intersection(sf::Shape& shape, sf::RenderWindow& window) {
+        sf::Vector2i mouse_pos = sf::Mouse::getPosition(window);
+        if (shape.getGlobalBounds().contains(static_cast<sf::Vector2f>(mouse_pos))) {
+            return 1;
+        }
+        return 0;
+    }
+
     void draw(sf::RenderWindow& window) {
         window.draw(F_value);
         window.draw(m_value);
         
-        if (intersection(F_value_up, window)) {
-            hover(F_value_up);
-            window.draw(F_value_up);
-        } else {
-            window.draw(F_value_up);
-        }
-        
+        window.draw(F_value_up);
+
         window.draw(F_value_down);
         window.draw(m_value_up);
         window.draw(m_value_down);
