@@ -5,10 +5,11 @@
 #include <SFML/Window/Keyboard.hpp>
 
 // #include <vector>
-// #include <iostream>
+#include <iostream>
 
 #include "physics/formulas.hpp"
 #include "buttons/values.hpp"
+#include "buttons/styling/style.hpp"
 
 
 class MainFrame {
@@ -165,7 +166,29 @@ int main() {
             is_hover = 0;
         }
 
-        std::cout << "is_hover: " << is_hover << std::endl;
+        if (values.intersection(values.F_value_down, window)) {
+            values.set_new_color(values.F_value_down, sf::Color::Cyan);
+            is_hover = 1;
+        } else {
+            values.set_new_color(values.F_value_down, sf::Color::Red);
+            is_hover = 0;
+        }
+
+        if (values.intersection(values.m_value_up, window)) {
+            values.set_new_color(values.m_value_up, sf::Color::Cyan);
+            is_hover = 1;
+        } else {
+            values.set_new_color(values.m_value_up, sf::Color::Green);
+            is_hover = 0;
+        }
+
+        if (values.intersection(values.m_value_down, window)) {
+            values.set_new_color(values.m_value_down, sf::Color::Cyan);
+            is_hover = 1;
+        } else {
+            values.set_new_color(values.m_value_down, sf::Color::Red);
+            is_hover = 0;
+        }
 
         values.draw(window);
 

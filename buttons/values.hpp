@@ -4,9 +4,6 @@
 #include <SFML/Graphics/Vertex.hpp>
 #include <SFML/Window/Keyboard.hpp>
 #include <SFML/Window/Mouse.hpp>
-#include <iostream>
-
-#include "styling/style.hpp"
 
 struct RectInfo {
     float size_x;
