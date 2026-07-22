@@ -159,36 +159,46 @@ int main() {
         main_frame.draw_lines(window);
 
         if (values.intersection(values.F_value_up, window)) {
-            values.set_new_color(values.F_value_up, sf::Color::Cyan);
-            is_hover = 1;
+            if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+                values.set_new_color(values.F_value_up, sf::Color::Blue);
+            } else {
+                values.set_new_color(values.F_value_up, sf::Color::Cyan);
+            }
         } else {
             values.set_new_color(values.F_value_up, sf::Color::Green);
-            is_hover = 0;
         }
 
         if (values.intersection(values.F_value_down, window)) {
-            values.set_new_color(values.F_value_down, sf::Color::Cyan);
-            is_hover = 1;
+            if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+                values.set_new_color(values.F_value_down, sf::Color::Blue);
+            } else {
+                values.set_new_color(values.F_value_down, sf::Color::Cyan);
+            }
         } else {
             values.set_new_color(values.F_value_down, sf::Color::Red);
-            is_hover = 0;
         }
 
         if (values.intersection(values.m_value_up, window)) {
-            values.set_new_color(values.m_value_up, sf::Color::Cyan);
-            is_hover = 1;
+            if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+                values.set_new_color(values.m_value_up, sf::Color::Blue);
+            } else {
+                values.set_new_color(values.m_value_up, sf::Color::Cyan);
+            }
         } else {
             values.set_new_color(values.m_value_up, sf::Color::Green);
-            is_hover = 0;
         }
 
         if (values.intersection(values.m_value_down, window)) {
-            values.set_new_color(values.m_value_down, sf::Color::Cyan);
-            is_hover = 1;
+            if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+                values.set_new_color(values.m_value_down, sf::Color::Blue);
+            } else {
+                values.set_new_color(values.m_value_down, sf::Color::Cyan);
+            }
         } else {
             values.set_new_color(values.m_value_down, sf::Color::Red);
-            is_hover = 0;
         }
+
+        
 
         values.draw(window);
 
