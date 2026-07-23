@@ -29,20 +29,15 @@ namespace {
         triangle.setFillColor(sf::Color::Red);
     }
 
-    int update_button_color(struct ShapeInfo& info, sf::RenderWindow& window, sf::Color default_color) {
+    void update_button_color(struct ShapeInfo& info, sf::RenderWindow& window, sf::Color default_color) {
         sf::Vector2i mouse_pos = sf::Mouse::getPosition(window);
         bool hovered = info.shape.getGlobalBounds().contains(static_cast<sf::Vector2f>(mouse_pos));
 
         if (!hovered) {
             info.shape.setFillColor(default_color);
-        } else if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
-            info.is_pressed = 1;
-            info.shape.setFillColor(sf::Color::Blue);
-            return info.index;
         } else {
             info.shape.setFillColor(sf::Color::Cyan);
         }
-        return -1;
     }
 }
 
@@ -56,6 +51,22 @@ Values::Values(const RectInfo& F_info, const RectInfo& m_info) {
     init_triangle_down(m_value_down, m_info);
 }
 
+int Values::delegator(sf::Vector2f world_pos) {
+    if (F_value_up.getGlobalBounds().contains(world_pos)) {
+        return 0;
+    }
+    if (F_value_down.getGlobalBounds().contains(world_pos)) {
+        return 1;
+    }
+    if (m_value_up.getGlobalBounds().contains(world_pos)) {
+        return 2;
+    }
+    if (m_value_down.getGlobalBounds().contains(world_pos)) {
+        return 3;
+    }
+    return -1;
+}
+
 void Values::draw(sf::RenderWindow& window) {
     window.draw(F_value);
     window.draw(m_value);
@@ -66,17 +77,9 @@ void Values::draw(sf::RenderWindow& window) {
     window.draw(m_value_down);
 }
 
-int Values::update_button_colors(sf::RenderWindow& window) {
-    int button_pressed = -1;
-    button_pressed = update_button_color(F_value_down_info, window, sf::Color::Green);
-    if (button_pressed == -1) {
-        button_pressed = update_button_color(F_value_up_info, window, sf::Color::Red);
-    }
-    if (button_pressed == -1) {
-        button_pressed = update_button_color(m_value_down_info, window, sf::Color::Green);
-    }
-    if (button_pressed == -1) {
-        button_pressed = update_button_color(m_value_up_info, window, sf::Color::Red);
-    }
-    return button_pressed;
+void Values::update_button_colors(sf::RenderWindow& window) {
+    update_button_color(F_value_down_info, window, sf::Color::Green);
+    update_button_color(F_value_up_info, window, sf::Color::Red);
+    update_button_color(m_value_down_info, window, sf::Color::Green);
+    update_button_color(m_value_up_info, window, sf::Color::Red);
 }
