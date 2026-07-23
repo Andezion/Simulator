@@ -28,7 +28,7 @@ std::pair<float, float> Rocket::getSize() const {
 }
 
 void Rocket::apply_flight_physics(sf::Time elapsed, float thrust, float mass) {
-    float h0 = rocket.getPosition().y;
+    float h0 = rocket.getPosition().y; 
 
     if (acceleration_up(thrust, mass, elapsed) >= 0) {
         float a = acceleration_up(thrust, mass, elapsed);

@@ -1,6 +1,5 @@
 #include "application.hpp"
 #include <SFML/Graphics/Font.hpp>
-
 namespace {
     constexpr unsigned window_width = 1200;
     constexpr unsigned window_height = 800;
@@ -41,11 +40,24 @@ Application::Application()
     text_F.setFillColor(sf::Color::Black);
     text_F.setPosition(scale_100_x * 2 + scale_10_x * 3 / 2, scale_50_y + scale_10_y / 4 * 3);
 
+    input_F.setFont(font);
+    
+    input_F.setString(std::format("{:.2f}", rocket_thrust));
+    input_F.setCharacterSize(24);
+    input_F.setFillColor(sf::Color::Black);
+    input_F.setPosition(scale_100_x + scale_10_x, scale_50_y + scale_10_y / 4 * 3);
+
     text_m.setFont(font);
     text_m.setString("m");
     text_m.setCharacterSize(24);
     text_m.setFillColor(sf::Color::Black);
     text_m.setPosition(scale_100_x * 2 + scale_10_x * 3 / 2, scale_100_y + scale_50_y + scale_10_y / 4 * 3);
+
+    input_m.setFont(font);
+    input_m.setString(std::format("{:.2f}", rocket_mass));
+    input_m.setCharacterSize(24);
+    input_m.setFillColor(sf::Color::Black);
+    input_m.setPosition(scale_100_x + scale_10_x, scale_100_y + scale_50_y + scale_10_y / 4 * 3);
 }
 
 void Application::run() {
@@ -81,6 +93,8 @@ void Application::render() {
     rocket->draw(window);
     window.draw(text_F);
     window.draw(text_m);
+    window.draw(input_F);
+    window.draw(input_m);
 
     window.display();
 }
