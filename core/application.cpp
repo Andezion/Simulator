@@ -75,25 +75,31 @@ void Application::handle_events() {
             sf::Keyboard::isKeyPressed(sf::Keyboard::Escape) ||
             sf::Keyboard::isKeyPressed(sf::Keyboard::Q)) {
             window.close();
+        } else if (event.type == sf::Event::MouseButtonReleased) {
+            if (event.mouseButton.button == sf::Mouse::Left) {
+                sf::Vector2i click_position(event.mouseButton.x, event.mouseButton.y);
+                int button_pressed = values->delegator(window.mapPixelToCoords(click_position));
+
+                if (button_pressed == 0) {
+                    rocket_thrust += 1.0f;
+                    input_F.setString(std::format("{:.2f}", rocket_thrust));
+                } else if (button_pressed == 1) {
+                    rocket_thrust -= 1.0f;
+                    input_F.setString(std::format("{:.2f}", rocket_thrust));
+                } else if (button_pressed == 2) {
+                    rocket_mass += 1.0f;
+                    input_m.setString(std::format("{:.2f}", rocket_mass));
+                } else if (button_pressed == 3) {
+                    rocket_mass -= 1.0f;
+                    input_m.setString(std::format("{:.2f}", rocket_mass));
+                }
+            }
         }
     }
 }
 
 void Application::update() {
-    int button_pressed = values->update_button_colors(window);
-    if (button_pressed == 0) {
-        rocket_thrust += 1.0f;
-        input_F.setString(std::format("{:.2f}", rocket_thrust));
-    } else if (button_pressed == 1) {
-        rocket_thrust -= 1.0f;
-        input_F.setString(std::format("{:.2f}", rocket_thrust));
-    } else if (button_pressed == 2) {
-        rocket_mass += 1.0f;
-        input_m.setString(std::format("{:.2f}", rocket_mass));
-    } else if (button_pressed == 3) {
-        rocket_mass -= 1.0f;
-        input_m.setString(std::format("{:.2f}", rocket_mass));
-    }
+    values->update_button_colors(window);
     rocket->apply_flight_physics(clock.getElapsedTime(), rocket_thrust, rocket_mass);
 }
 

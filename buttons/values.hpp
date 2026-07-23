@@ -20,7 +20,8 @@ public:
     Values(const RectInfo& F_info, const RectInfo& m_info);
 
     void draw(sf::RenderWindow& window);
-    int update_button_colors(sf::RenderWindow& window);
+    void update_button_colors(sf::RenderWindow& window);
+    int delegator(sf::Vector2f world_pos);
 
 private:
     sf::RectangleShape F_value;
