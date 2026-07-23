@@ -33,4 +33,5 @@ private:
     void handle_events();
     void update();
     void render();
+    void update_input();
 };

@@ -1,5 +1,12 @@
 #pragma once
 #include <SFML/Graphics.hpp>
+#include <SFML/Graphics/Shape.hpp>
+
+struct ShapeInfo {
+    sf::Shape &shape;
+    int index;
+    int is_pressed;
+};
 
 struct RectInfo {
     float size_x;
@@ -13,7 +20,7 @@ public:
     Values(const RectInfo& F_info, const RectInfo& m_info);
 
     void draw(sf::RenderWindow& window);
-    void update_button_colors(sf::RenderWindow& window);
+    int update_button_colors(sf::RenderWindow& window);
 
 private:
     sf::RectangleShape F_value;
@@ -24,4 +31,9 @@ private:
 
     sf::ConvexShape m_value_up;
     sf::ConvexShape m_value_down;
+
+    struct ShapeInfo F_value_up_info{F_value_up, 0, 0};
+    struct ShapeInfo F_value_down_info{F_value_down, 1, 0};
+    struct ShapeInfo m_value_up_info{m_value_up, 2, 0};
+    struct ShapeInfo m_value_down_info{m_value_down, 3, 0};
 };

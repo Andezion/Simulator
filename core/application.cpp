@@ -5,8 +5,8 @@ namespace {
     constexpr unsigned window_height = 800;
     constexpr unsigned framerate_limit = 120;
 
-    constexpr float rocket_thrust = 100.0f;
-    constexpr float rocket_mass = 10.0f;
+    float rocket_thrust = 100.0f;
+    float rocket_mass = 10.0f;
 }
 
 Application::Application()
@@ -80,7 +80,20 @@ void Application::handle_events() {
 }
 
 void Application::update() {
-    values->update_button_colors(window);
+    int button_pressed = values->update_button_colors(window);
+    if (button_pressed == 0) {
+        rocket_thrust += 1.0f;
+        input_F.setString(std::format("{:.2f}", rocket_thrust));
+    } else if (button_pressed == 1) {
+        rocket_thrust -= 1.0f;
+        input_F.setString(std::format("{:.2f}", rocket_thrust));
+    } else if (button_pressed == 2) {
+        rocket_mass += 1.0f;
+        input_m.setString(std::format("{:.2f}", rocket_mass));
+    } else if (button_pressed == 3) {
+        rocket_mass -= 1.0f;
+        input_m.setString(std::format("{:.2f}", rocket_mass));
+    }
     rocket->apply_flight_physics(clock.getElapsedTime(), rocket_thrust, rocket_mass);
 }
 

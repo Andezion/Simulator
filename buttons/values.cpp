@@ -29,17 +29,20 @@ namespace {
         triangle.setFillColor(sf::Color::Red);
     }
 
-    void update_button_color(sf::Shape& shape, sf::RenderWindow& window, sf::Color default_color) {
+    int update_button_color(struct ShapeInfo& info, sf::RenderWindow& window, sf::Color default_color) {
         sf::Vector2i mouse_pos = sf::Mouse::getPosition(window);
-        bool hovered = shape.getGlobalBounds().contains(static_cast<sf::Vector2f>(mouse_pos));
+        bool hovered = info.shape.getGlobalBounds().contains(static_cast<sf::Vector2f>(mouse_pos));
 
         if (!hovered) {
-            shape.setFillColor(default_color);
+            info.shape.setFillColor(default_color);
         } else if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
-            shape.setFillColor(sf::Color::Blue);
+            info.is_pressed = 1;
+            info.shape.setFillColor(sf::Color::Blue);
+            return info.index;
         } else {
-            shape.setFillColor(sf::Color::Cyan);
+            info.shape.setFillColor(sf::Color::Cyan);
         }
+        return -1;
     }
 }
 
@@ -63,9 +66,17 @@ void Values::draw(sf::RenderWindow& window) {
     window.draw(m_value_down);
 }
 
-void Values::update_button_colors(sf::RenderWindow& window) {
-    update_button_color(F_value_up, window, sf::Color::Green);
-    update_button_color(F_value_down, window, sf::Color::Red);
-    update_button_color(m_value_up, window, sf::Color::Green);
-    update_button_color(m_value_down, window, sf::Color::Red);
+int Values::update_button_colors(sf::RenderWindow& window) {
+    int button_pressed = -1;
+    button_pressed = update_button_color(F_value_down_info, window, sf::Color::Green);
+    if (button_pressed == -1) {
+        button_pressed = update_button_color(F_value_up_info, window, sf::Color::Red);
+    }
+    if (button_pressed == -1) {
+        button_pressed = update_button_color(m_value_down_info, window, sf::Color::Green);
+    }
+    if (button_pressed == -1) {
+        button_pressed = update_button_color(m_value_up_info, window, sf::Color::Red);
+    }
+    return button_pressed;
 }
