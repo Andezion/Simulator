@@ -1,4 +1,5 @@
 #include "application.hpp"
+#include <SFML/Graphics/Font.hpp>
 
 namespace {
     constexpr unsigned window_width = 1200;
@@ -17,6 +18,8 @@ Application::Application()
     float scale_100_y = window.getSize().y / 8.0f;
     float scale_50_x = window.getSize().x / 24.0f;
     float scale_50_y = window.getSize().y / 16.0f;
+    float scale_10_x = window.getSize().x / 120.0f;
+    float scale_10_y = window.getSize().y / 80.0f;
 
     main_frame.emplace(scale_100_x * 9, scale_100_y * 7, scale_100_x * 2 + scale_50_x, scale_50_y);
 
@@ -27,6 +30,22 @@ Application::Application()
     rocket.emplace(scale_100_x / 8, scale_100_y / 4,
         main_frame->getPosition().first + 50.0f,
         main_frame->getPosition().second + main_frame->getSize().second - scale_100_y / 4);
+
+    if (!font.loadFromFile("Arial.ttf")) {
+        // do smth plz
+    }
+
+    text_F.setFont(font);
+    text_F.setString("F");
+    text_F.setCharacterSize(24);
+    text_F.setFillColor(sf::Color::Black);
+    text_F.setPosition(scale_100_x * 2 + scale_10_x * 3 / 2, scale_50_y + scale_10_y / 4 * 3);
+
+    text_m.setFont(font);
+    text_m.setString("m");
+    text_m.setCharacterSize(24);
+    text_m.setFillColor(sf::Color::Black);
+    text_m.setPosition(scale_100_x * 2 + scale_10_x * 3 / 2, scale_100_y + scale_50_y + scale_10_y / 4 * 3);
 }
 
 void Application::run() {
@@ -60,6 +79,8 @@ void Application::render() {
     main_frame->draw_grid(window);
     values->draw(window);
     rocket->draw(window);
+    window.draw(text_F);
+    window.draw(text_m);
 
     window.display();
 }

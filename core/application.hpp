@@ -1,5 +1,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
+#include <SFML/Graphics/Font.hpp>
+#include <SFML/Graphics/Text.hpp>
 #include <optional>
 
 #include "../entities/main_frame.hpp"
@@ -15,6 +17,10 @@ public:
 private:
     sf::RenderWindow window;
     sf::Clock clock;
+
+    sf::Font font;
+    sf::Text text_F;
+    sf::Text text_m;
 
     std::optional<MainFrame> main_frame;
     std::optional<Values> values;
